@@ -15,6 +15,7 @@
     pkgs.git
     # for generating password
     pkgs.mkpasswd
-    pkgs.vim
+    # vim customized
+    (import ./vim.nix)
   ];
 }
