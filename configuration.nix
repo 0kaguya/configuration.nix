@@ -1,13 +1,20 @@
 { lib, pkgs, ... }:
 
+with (import ./private.nix);
 {
   imports = [
     ./wsl.nix
-    ./private.nix
   ];
 
-  # do not change user infomation elsewhere.
+  # do not change user settings by manual command.
   users.mutableUsers = false;
+  # set up user password.
+  users.users.${defaultUser} = {
+    hashedPassword = defaultUserPassword;
+  };
+  users.users.root = {
+    hashedPassword = rootPassword;
+  };
 
   # basic packages.
   environment.systemPackages = [

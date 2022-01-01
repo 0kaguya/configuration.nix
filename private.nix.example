@@ -1,21 +1,13 @@
-{ config, pkgs, ... }:
-
-let
-  defaultUser = import ./defaultUser.nix;
-in {
+{
+  defaultUser = "nixos";
   ## Password are generated from `mkpasswd -m sha-512`; for more infomation see
   ## https://nixpkgs-manual-sphinx-markedown-example.netlify.app/configuration/user-mgmt.xml.html
-
-  users.users.${defaultUser} = {
-    hashedPassword = 
-      # "12345678"
-      "$6$V43wJDX16VpGybM$6z32pHbg8VCK5yV7R3F.KPtYZQS3s.RWi.DHyLI0ooRFrQloOvjKhUQUlvzv9Y55E21r55nRajJNAc69oGqjM/"
-    ;
-  };
-  users.users.root = {
-    hashedPassword = 
-      # "1234567890"
-      "$6$F9eqnIFRTN$.w/KxjJRyM.tH1ZIYTul7O6pJyHEUNwMQjYxl8./5n3OTqJp7fPj4HqKctKXZYg7ykIgBblYdtjK5mFbwdk.C/"
-    ;
-  };
+  defaultUserPassword =
+    "$6$WZrBXzenF1Em.$5Zu4IGtRofa5NHOOrCfqoRGKegPb0NbyjrO5/GLlfXKFl1KbCeIbB23RL6IG1aU1Z9G535juqMj58obwvkbSY/"
+    # 123456
+  ;
+  rootPassword =
+    "$6$pV4ECQ1KL2$n9TutJGgkxD227y3T.lKgG/JOTKsFMyuc9EBhoMuWfWC1j/p7PeuS09aEKQI/XWt7IUy48k9a4JlijXVJtWRw0"
+    # 12345678
+  ;
 }
