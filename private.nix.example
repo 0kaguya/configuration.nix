@@ -1,3 +1,4 @@
+# vim: filetype=nix
 {
   defaultUser = "nixos";
   ## Password are generated from `mkpasswd -m sha-512`; for more infomation see
