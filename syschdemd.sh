@@ -1,5 +1,5 @@
 #! @shell@
-
+# directly from https://github.com/Trundle/NixOS-WSL
 set -e
 
 sw="/nix/var/nix/profiles/system/sw/bin"

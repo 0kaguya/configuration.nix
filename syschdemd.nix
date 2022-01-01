@@ -1,3 +1,4 @@
+# directly from https://github.com/Trundle/NixOS-WSL
 { lib, pkgs, config, defaultUser, ... }:
 
 pkgs.substituteAll {

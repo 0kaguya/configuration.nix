@@ -1,3 +1,4 @@
+# modified from https://github.com/Trundle/NixOS-WSL
 { lib, pkgs, config, modulesPath, ... }:
 
 with lib; with (import ./private.nix);
