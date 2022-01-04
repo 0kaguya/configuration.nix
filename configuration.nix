@@ -1,7 +1,17 @@
 { lib, pkgs, ... }:
 
-with (import ./private.nix);
-{
+with (import ./private.nix); let
+  # Individual apps.
+  apps = with pkgs; [
+    emacs
+
+    # Detecting system info.
+    profetch
+    cpufetch
+    # Check if X11 works.
+    xorg.xclock
+  ];
+in {
   imports = [
     ./wsl.nix
   ];
@@ -49,7 +59,7 @@ with (import ./private.nix);
     # Vim customized.
     (import ./vim.nix)
 
-  ];
+  ] ++ apps;
 
   # Commented. manually run it instead.
   # programs.gnupg.agent = {
