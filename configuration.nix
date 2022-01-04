@@ -6,6 +6,10 @@ with (import ./private.nix);
     ./wsl.nix
   ];
 
+  # Looks like `isContainer = true` in ./wsl.nix (just
+  # guessing) disabled X11 libs. Enable it again here.
+  environment.noXlibs = false;
+
   # do not change user settings by manual command.
   users.mutableUsers = false;
   # set up user password.
@@ -23,12 +27,33 @@ with (import ./private.nix);
   };
 
   # basic packages.
-  environment.systemPackages = [
-    pkgs.man
-    pkgs.git
+  environment.systemPackages = with pkgs; [
+    man
+    git
+
     # for generating password
-    pkgs.mkpasswd
-    # vim customized
+    mkpasswd
+    # for encrypting ./private.nix
+    git-crypt
+    # `gpg` can't find `pinentry` binary. Here's the
+    # stupid way to solve it, just run it manually:
+    # ``` bash
+    # $ gpg-agent \
+    #     --pinentry-program \
+    #         /run/current-system/sw/bin/pinentry \
+    #     --daemon
+    # ```
+    gnupg
+    pinentry
+
+    # Vim customized.
     (import ./vim.nix)
+
   ];
+
+  # Commented. manually run it instead.
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   pinentryFlavor = "curses";
+  # };
 }
