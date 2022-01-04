@@ -66,4 +66,12 @@ in {
   #   enable = true;
   #   pinentryFlavor = "curses";
   # };
+
+  # Add flakes command to Nix.
+  nix = {
+    package = pkgs.nixUnstable;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
 }
