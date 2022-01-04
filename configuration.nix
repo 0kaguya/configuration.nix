@@ -14,6 +14,7 @@ with (import ./private.nix); let
 in {
   imports = [
     ./wsl.nix
+    ./vim/vim.nix
   ];
 
   # Looks like `isContainer = true` in ./wsl.nix (just
@@ -40,6 +41,7 @@ in {
   environment.systemPackages = with pkgs; [
     man
     git
+    vimHugeX
 
     # for generating password
     mkpasswd
@@ -55,9 +57,6 @@ in {
     # ```
     gnupg
     pinentry
-
-    # Vim customized.
-    (import ./vim.nix)
 
   ] ++ apps;
 
