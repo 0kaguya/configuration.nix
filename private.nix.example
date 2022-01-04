@@ -11,4 +11,5 @@
     "$6$pV4ECQ1KL2$n9TutJGgkxD227y3T.lKgG/JOTKsFMyuc9EBhoMuWfWC1j/p7PeuS09aEKQI/XWt7IUy48k9a4JlijXVJtWRw0"
     # 12345678
   ;
+  httpProxy = "127.0.0.1:1080";
 }

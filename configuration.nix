@@ -16,6 +16,12 @@ with (import ./private.nix);
     hashedPassword = rootPassword;
   };
 
+  # configure network proxy
+  networking.proxy = {
+    default = httpProxy;
+    noProxy = "127.0.0.1,localhost,internal.domain";
+  };
+
   # basic packages.
   environment.systemPackages = [
     pkgs.man
