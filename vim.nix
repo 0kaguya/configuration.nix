@@ -30,10 +30,17 @@ vim_configurable.customize {
     set cursorline
     highlight CursorLine cterm=NONE
     highlight CursorLineNr ctermfg=blue
-    " set GitGutter sign column color
+    " Set GitGutter sign column color, it
     " fixed the problem that the column has grey background.
     highlight SignColumn ctermbg=NONE
     
     set clipboard=unnamedplus   
+
+    " Sync every 1000 ms rather than default 4000ms so have
+    " better experience for GitGutter.
+    set updatetime=1000
+    " Always show GitGutter's side bar so won't occasionally
+    " moves the entire text.
+    set signcolumn=yes
   '';
 }
