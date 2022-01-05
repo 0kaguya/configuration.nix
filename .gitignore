@@ -1,3 +1,5 @@
 # private.nix
 result
 .git-crypt/keyfile
+# Considering add lock file into repo in future.
+flake.lock
