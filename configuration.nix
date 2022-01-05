@@ -11,6 +11,12 @@ with (import ./private.nix); let
     # Check if X11 works.
     xorg.xclock
   ];
+  shells = {
+    # For interactive use, i.e default shell.
+    login = pkgs.zsh;
+    # For scripts. Linked to /bin/sh.
+    script = pkgs.dash;
+  };
 in {
   imports = [
     ./wsl.nix
@@ -39,8 +45,11 @@ in {
 
   # basic packages.
   environment.systemPackages = with pkgs; [
+    # Linux manual
     man
+    # Version control
     git
+    # Command line editor
     vimHugeX
 
     # for generating password
@@ -58,7 +67,9 @@ in {
     gnupg
     pinentry
 
-  ] ++ apps;
+    # Alternative to `find`
+    fd
+  ] ++ builtins.attrValues shells ++ apps;
 
   # Commented. manually run it instead.
   # programs.gnupg.agent = {
@@ -73,4 +84,24 @@ in {
       experimental-features = nix-command flakes
     '';
   };
+
+  # Global shell aliases
+  # environment.shellAliases = {
+  # };
+  
+  programs.zsh = {
+    enable = shells.login == pkgs.zsh;
+    syntaxHighlighting.enable = true;
+    enableBashCompletion = true;
+    autosuggestions.enable = true;
+    interactiveShellInit = ''
+      PS1="%F{32}%~ %F{34}%# %f"
+    '';
+  };
+
+  # Set default shell fro all users.
+  users.defaultUserShell = shells.login;
+
+  # Link `/bin/sh` to the `shells.script` package.
+  environment.binsh = "${shells.script}${shells.script.shellPath}";
 }
