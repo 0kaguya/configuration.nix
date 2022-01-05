@@ -1,4 +1,4 @@
-## `home-manager` config for user `/home/$defaultUser`
+## `home-manager` config for `/home/$defaultUser`
 { config, lib, pkgs, ... }:
 
 let
@@ -91,5 +91,7 @@ in {
       # aliases = {
       # };
     } // (import ./private.nix).git;
+
+    home.file."nixos".source = config.lib.file.mkOutOfStoreSymlink /etc/nixos;
   };
 }
