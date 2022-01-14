@@ -21,6 +21,8 @@ in {
     programs = {
       zsh = {
         enable = defaultShell == pkgs.zsh;
+        defaultKeymap = "emacs";
+
         enableSyntaxHighlighting = true;
         enableCompletion = true;
         enableAutosuggestions = true;
