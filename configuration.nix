@@ -11,11 +11,13 @@ with (import ./private.nix); let
     # Check if X11 works.
     xorg.xclock
   ];
-  shells = {
+  defaultApps = {
+    # Default editor.
+    editor = pkgs.vimHugeX;
     # For interactive use, i.e default shell.
-    login = pkgs.zsh;
+    loginShell = pkgs.zsh;
     # For scripts. Linked to /bin/sh.
-    script = pkgs.dash;
+    shellScript = pkgs.dash;
   };
 in {
   imports = [
@@ -49,8 +51,6 @@ in {
     man
     # Version control
     git
-    # Command line editor
-    vimHugeX
 
     # for generating password
     mkpasswd
@@ -69,7 +69,7 @@ in {
 
     # Alternative to `find`
     fd
-  ] ++ builtins.attrValues shells ++ apps;
+  ] ++ builtins.attrValues defaultApps ++ apps;
 
   # Commented. manually run it instead.
   # programs.gnupg.agent = {
@@ -90,7 +90,7 @@ in {
   # };
   
   programs.zsh = {
-    enable = shells.login == pkgs.zsh;
+    enable = defaultApps.loginShell == pkgs.zsh;
     syntaxHighlighting.enable = true;
     enableBashCompletion = true;
     autosuggestions.enable = true;
@@ -100,10 +100,11 @@ in {
   };
 
   # Set default shell fro all users.
-  users.defaultUserShell = shells.login;
+  users.defaultUserShell = defaultApps.loginShell;
 
   # Link `/bin/sh` with `shells.script` package.
-  environment.binsh = "${shells.script}${shells.script.shellPath}";
+  environment.binsh = let pkg = defaultApps.shellScript; in
+      "${pkg}${pkg.shellPath}";
 
   # Set hostname.
   networking.hostName = hostName;
@@ -119,5 +120,10 @@ in {
       generateHosts = false
       generateResolvConf = true
     '';
+  };
+
+  programs.vim = {
+    package = pkgs.vimHugeX;
+    defaultEditor = defaultApps.editor == pkgs.vimHugeX;
   };
 }
