@@ -1,6 +1,7 @@
 # vim: filetype=nix
 {
   defaultUser = "nixos";
+  hostName = "nixos";
   ## Password are generated from `mkpasswd -m sha-512`; for more infomation see
   ## https://nixpkgs-manual-sphinx-markedown-example.netlify.app/configuration/user-mgmt.xml.html
   defaultUserPassword =
