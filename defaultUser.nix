@@ -28,7 +28,7 @@ in {
         enableAutosuggestions = true;
 
         history = {
-          path = "${config.xdg.dataHome}/zsh/zsh_history";
+          path = "../../${config.xdg.dataHome}/zsh/zsh_history";
           ignorePatterns = [
             "cd *"
             "cp *"
