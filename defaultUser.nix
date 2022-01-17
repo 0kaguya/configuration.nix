@@ -76,7 +76,6 @@ in {
                                   [34 " %#"]]);
         };
 
-        # TODO Aliases defined elsewhere seems doesn't work
         shellAliases = {
           # Aliases for reload NixOS and Zsh
           nextsetup = "sudo nixos-rebuild switch";
@@ -86,13 +85,12 @@ in {
           gcommit = "git commit --edit";
         };
       };
+      git = {
+        enable = true;
+        aliases = {
+        };
+      } // (import ./private.nix).git;
     };
-    # TODO Doesn't work at all.
-    programs.git = {
-      enable = true;
-      # aliases = {
-      # };
-    } // (import ./private.nix).git;
 
     home.file."nixos".source = config.lib.file.mkOutOfStoreSymlink /etc/nixos;
   };
