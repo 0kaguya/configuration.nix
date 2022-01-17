@@ -41,7 +41,7 @@ in {
 
   # configure network proxy
   networking.proxy = {
-    default = httpProxy;
+    default = "${hostName}.local:${httpProxyPort}";
     noProxy = "127.0.0.1,localhost,internal.domain";
   };
 
