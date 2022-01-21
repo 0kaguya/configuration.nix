@@ -5,7 +5,6 @@ let
   defaultUser = (import ./private.nix).defaultUser;
   defaultShell = pkgs.zsh;
   userApps = with pkgs; [
-    python39Packages.ipython
   ];
 in {
   # Set default shell
@@ -92,6 +91,9 @@ in {
       } // (import ./private.nix).git;
     };
 
-    home.file."nixos".source = config.lib.file.mkOutOfStoreSymlink /etc/nixos;
+    home.file = with config.lib.file; {
+      "nixos".source = mkOutOfStoreSymlink /etc/nixos;
+      "win".source = mkOutOfStoreSymlink (import ./private.nix).winHome;
+    };
   };
 }
