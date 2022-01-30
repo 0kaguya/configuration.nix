@@ -5,6 +5,11 @@ let
   defaultUser = (import ./private.nix).defaultUser;
   defaultShell = pkgs.zsh;
   userApps = with pkgs; [
+    mdbook # markdown book generation.
+    you-get # grab videos from url.
+    julia_16-bin
+    jupyter
+    (writeShellScriptBin "jupyter" "exec ${jupyter}/bin/jupyter-notebook") # alias for working with julia.
   ];
 in {
   # Set default shell
@@ -27,7 +32,7 @@ in {
         enableAutosuggestions = true;
 
         history = {
-          path = "../../${config.xdg.dataHome}/zsh/zsh_history";
+          path = "../..${config.xdg.dataHome}/zsh/zsh_history";
           ignorePatterns = [
             "cd *"
             "cp *"
@@ -38,6 +43,7 @@ in {
             "emacs *"
             "cat *"
             "echo *"
+            "jupyter" # alias, just for compablity for scripts.
           ];
           extended = true;
         };

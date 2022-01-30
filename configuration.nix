@@ -3,8 +3,6 @@
 with (import ./private.nix); let
   # Individual apps.
   apps = with pkgs; [
-    emacs
-
     # Detecting system info.
     profetch
     cpufetch
