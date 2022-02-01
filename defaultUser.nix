@@ -9,7 +9,19 @@ let
     you-get # grab videos from url.
     julia_16-bin
     jupyter
-    (writeShellScriptBin "jupyter" "exec ${jupyter}/bin/jupyter-notebook") # alias for working with julia.
+    (writeScriptBin 
+      # install/update IJulia, the jupyter kernel for julia
+      "julia-notebook"
+      ''
+      #!/usr/bin/env julia
+      using Pkg
+      if "IJulia" in [v.name for v in values(Pkg.dependencies())]
+          Pkg.update("IJulia")
+      else
+          Pkg.add("IJulia")
+      end
+      ''
+      )
   ];
 in {
   # Set default shell
@@ -43,7 +55,6 @@ in {
             "emacs *"
             "cat *"
             "echo *"
-            "jupyter" # alias, just for compablity for scripts.
           ];
           extended = true;
         };
