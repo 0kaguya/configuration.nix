@@ -8,6 +8,12 @@ with (import ./private.nix); let
     cpufetch
     # Check if X11 works.
     xorg.xclock
+
+    # Windows powershell.
+    (writeShellScriptBin
+      "ps"
+      "exec /mnt/c/Windows/System32/WindowsPowershell/v1.0/powershell.exe $@"
+      )
   ];
   defaultApps = {
     # Default editor.
