@@ -103,6 +103,9 @@ in {
       };
       git = {
         enable = true;
+        extraConfig = {
+          init.defaultBranch = "master";
+        };
         aliases = {
         };
       } // (import ./private.nix).git;
