@@ -98,7 +98,7 @@ in {
           reloadzsh = "exec zsh";
           # Add aliases for stonelike git commands
           gstat = "git status";
-          gcommit = "git commit --edit";
+          gcommit = "git commit -v --edit";
         };
       };
       git = {
