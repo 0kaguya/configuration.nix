@@ -13,6 +13,7 @@
             # Syntax supports
             vim-nix
             julia-vim
+            vim-toml
           ];
         };
         vimrcConfig.customRC = builtins.readFile ./vimrc;
