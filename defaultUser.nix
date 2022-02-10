@@ -22,6 +22,7 @@ let
       end
       ''
       )
+      bat
   ];
 in {
   # Set default shell
