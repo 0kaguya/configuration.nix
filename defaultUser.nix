@@ -5,6 +5,8 @@ let
   defaultUser = (import ./private.nix).defaultUser;
   defaultShell = pkgs.zsh;
   userApps = with pkgs; [
+    imagemagick
+    gcc
     mdbook # markdown book generation.
     you-get # grab videos from url.
     julia_16-bin
