@@ -14,6 +14,7 @@
             vim-nix
             julia-vim
             vim-toml
+            haskell-vim
           ];
         };
         vimrcConfig.customRC = builtins.readFile ./vimrc;
