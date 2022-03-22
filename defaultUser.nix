@@ -83,9 +83,12 @@ in {
             # https://man7.org/linux/man-pages/man3/strftime.3.html
             # "timezone:hour:minute"
             time = "%Z:%H:%M";
+            # xterm style title control
+            title = ''%{$(printf "\e]2;NixOS\a")%}'';
           ## Refer to the color of these numbers in
           ## https://www.ditig.com/256-colors-cheat-sheet
-          in concat (map colored [# [34 "<"]
+          in title +
+             concat (map colored [# [34 "<"]
                                   ## current time
                                   [32 (underlined "%D{${time}}")]
                                   # [34 ">"]
