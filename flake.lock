@@ -34,7 +34,7 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "narHash": "sha256-ipE01njsVh0R0u68nlce0+wDRrssbtt+XWFyoAbxVfI=",
+        "narHash": "sha256-sTZEvF+zEqTMGLEuGcRmv4KzCW8k1LfcaiBf0HsUZN0=",
         "type": "tarball",
         "url": "https://channels.nixos.org/nixos-21.11/nixexprs.tar.xz"
       },

@@ -120,6 +120,7 @@ in {
     home.file = with config.lib.file; {
       "nixos".source = mkOutOfStoreSymlink /etc/nixos;
       "win".source = mkOutOfStoreSymlink (import ./private.nix).winHome;
+      "doc".source = mkOutOfStoreSymlink (import ./private.nix).winDocuments;
     };
   };
 }

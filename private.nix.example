@@ -18,4 +18,5 @@
     userEmail = "name@example.net";
   };
   winHome = /mnt/c/Users/Public;
+  winDocuments = /mnt/c/Users/Public/Documents;
 }
