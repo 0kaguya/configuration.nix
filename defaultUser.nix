@@ -6,6 +6,7 @@ let
   defaultShell = pkgs.zsh;
   userApps = with pkgs; [
     imagemagick
+    img2pdf
     gcc
     mdbook # markdown book generation.
     you-get # grab videos from url.
@@ -121,6 +122,7 @@ in {
       "nixos".source = mkOutOfStoreSymlink /etc/nixos;
       "win".source = mkOutOfStoreSymlink (import ./private.nix).winHome;
       "doc".source = mkOutOfStoreSymlink (import ./private.nix).winDocuments;
+      ".Xresources".source = ./.Xresources;
     };
   };
 }

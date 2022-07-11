@@ -14,6 +14,9 @@ with (import ./private.nix); let
       "ps"
       "exec /mnt/c/Windows/System32/WindowsPowershell/v1.0/powershell.exe $@"
       )
+
+    # Emacs
+    emacsPgtkNativeComp
   ];
   defaultApps = {
     # Default editor.
@@ -27,6 +30,22 @@ in {
   imports = [
     ./wsl.nix
     ./vim/vim.nix
+  ];
+
+  # configure network proxy
+  networking.proxy = {
+    default = "${hostName}.local:${httpProxyPort}";
+    noProxy = "127.0.0.1,localhost,internal.domain";
+  };
+
+  # set emacs overlay
+  services.emacs.package = pkgs.emacsPgtkGcc;
+  nixpkgs.overlays = [
+    (import (builtins.fetchGit {
+      url = https://github.com/nix-community/emacs-overlay.git;
+      ref = "master";
+      rev = "7c367081f2f47f5ea3d5e18c958856294180256e";
+    }))
   ];
 
   # Looks like `isContainer = true` in ./wsl.nix (just
@@ -43,14 +62,10 @@ in {
     hashedPassword = rootPassword;
   };
 
-  # configure network proxy
-  networking.proxy = {
-    default = "${hostName}.local:${httpProxyPort}";
-    noProxy = "127.0.0.1,localhost,internal.domain";
-  };
 
   # basic packages.
   environment.systemPackages = with pkgs; [
+    glxinfo
     # Linux manual
     man
     # Version control
@@ -130,4 +145,8 @@ in {
     package = pkgs.vimHugeX;
     defaultEditor = defaultApps.editor == pkgs.vimHugeX;
   };
+
+  fonts.fonts = with pkgs; [
+    sarasa-gothic
+  ];
 }
